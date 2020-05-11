@@ -1,10 +1,10 @@
 require 'pry'
 class Dog
 
-    attr_accessor :name, :breed, :id
+    attr_accessor :name, :breed
+    attr_reader :id
 
     def initialize(name:, breed:, id: nil)
-        # binding.pry
         @name = name
         @breed = breed
         @id = id
@@ -46,7 +46,6 @@ class Dog
     end
 
     def self.new_from_db(row)
-        # binding.pry
         new_dog = self.new(id: row[0], name: row[1], breed: row[2])
         new_dog
     end
@@ -86,8 +85,5 @@ class Dog
         sql = "UPDATE dogs SET name = ?, breed = ? WHERE id = ?"
         DB[:conn].execute(sql, self.name, self.breed, self.id)
     end
-        
-
-
 
 end
